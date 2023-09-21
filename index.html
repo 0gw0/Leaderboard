@@ -11,6 +11,8 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="style.css" />
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="app.js" defer></script>
     </head>
     <body>
         <main>
@@ -23,57 +25,53 @@
             <div id="leaderboard">
                 <div class="ribbon"></div>
                 <table>
-                    <tr>
-                        <td class="number">1</td>
-                        <td class="name">Chi</td>
+                    <tr v-for="(person, idx) in people">
+                        <td class="number">{{ idx + 1 }}</td>
+                        <td class="name">{{ person.name }}</td>
                         <td class="points">
-                            14
+                            {{ person.points }}
                             <img
+                                v-if="idx === 0"
                                 class="gold-medal"
                                 src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
                                 alt="gold medal"
                             />
                         </td>
                     </tr>
-                    <tr>
-                        <td class="number">2</td>
-                        <td class="name">Sophie</td>
-                        <td class="points">13</td>
-                    </tr>
-                    <tr>
-                        <td class="number">3</td>
-                        <td class="name">Vicky</td>
-                        <td class="points">12</td>
-                    </tr>
-                    <tr>
-                        <td class="number">4</td>
-                        <td class="name">Hyin Ki</td>
-                        <td class="points">9</td>
-                    </tr>
-                    <tr>
-                        <td class="number">5</td>
-                        <td class="name">Jess Myn</td>
-                        <td class="points">7</td>
-                    </tr>
-                    <tr>
-                        <td class="number">6</td>
-                        <td class="name">Ivyn</td>
-                        <td class="points">5</td>
-                    </tr>
-                    <tr>
-                        <td class="number">7</td>
-                        <td class="name">Rachel</td>
-                        <td class="points">4</td>
-                    </tr>
-                    <tr id="last">
-                        <td class="number">8</td>
-                        <td class="name">Jun Ning</td>
-                        <td class="points">1</td>
-                    </tr>
                 </table>
+                <!-- Score input  -->
+                <div class="input-container">
+                    <div class="input">
+                        <label for="name" class="input-label">Name: </label>
+                        <input
+                            id="name"
+                            type="text"
+                            v-model="nameInput"
+                            @keydown.enter="addPoints"
+                        />
+                        <label for="score" class="input-label">Score: </label>
+                        <input
+                            id="score"
+                            type="number"
+                            class="score-input"
+                            v-model="pointsInput"
+                            @keydown.enter="addPoints"
+                        />
+                    </div>
+                </div>
+                <!-- Status message -->
+                <p
+                    class="status-msg"
+                    :class="statusClass"
+                    v-if="statusMsg != ''"
+                >
+                    {{ statusMsg }}
+                </p>
+                <!-- Add score button -->
                 <div id="buttons">
-                    <button class="exit">Exit</button>
-                    <button class="continue">Continue</button>
+                    <button class="add-score" @click="addPoints">
+                        Add Score
+                    </button>
                 </div>
             </div>
         </main>

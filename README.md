@@ -31,6 +31,7 @@ To get started with Leaderboard, follow these steps:
 -   HTML
 -   CSS
 -   JavaScript
+-   Vue
 
 ## Contributing
 

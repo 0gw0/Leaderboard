@@ -35,7 +35,7 @@ const app = Vue.createApp({
           if (this.nameInput !== "") {
             try {
               // Send a POST request to add points to the person in the database
-              const response = await fetch("http://localhost:8888/IS216/Leaderboard/api/add.php", {
+              const response = await fetch("api/add.php", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const app = Vue.createApp({
         },
         fetchAllPeople() {
             console.log("fetchAllPeople - start");
-            let api_endpoint_url = "http://localhost:8888/IS216/Leaderboard/api/read.php";
+            let api_endpoint_url = "api/read.php";
             axios.get(api_endpoint_url).then(response => {
                 // Parse the JSON response
                 console.log("fetchAllPeople - response");

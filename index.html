@@ -11,8 +11,6 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="style.css" />
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <script src="app.js" defer></script>
     </head>
     <body>
         <main>
@@ -31,10 +29,10 @@
                         <td class="points">
                             {{ person.points }}
                             <img
-                                v-if="idx === 0"
-                                class="gold-medal"
-                                src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
-                                alt="gold medal"
+                            v-if="idx === 0"
+                            class="gold-medal"
+                            src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
+                            alt="gold medal"
                             />
                         </td>
                     </tr>
@@ -44,36 +42,40 @@
                     <div class="input">
                         <label for="name" class="input-label">Name: </label>
                         <input
-                            id="name"
-                            type="text"
-                            v-model="nameInput"
-                            @keydown.enter="addPoints"
+                        id="name"
+                        type="text"
+                        v-model="nameInput"
+                        @keydown.enter="addPoints"
                         />
                         <label for="score" class="input-label">Score: </label>
                         <input
-                            id="score"
-                            type="number"
-                            class="score-input"
-                            v-model="pointsInput"
-                            @keydown.enter="addPoints"
+                        id="score"
+                        type="number"
+                        class="score-input"
+                        v-model="pointsInput"
+                        @keydown.enter="addPoints"
                         />
                     </div>
                 </div>
                 <!-- Status message -->
                 <p
-                    class="status-msg"
-                    :class="statusClass"
-                    v-if="statusMsg != ''"
+                class="status-msg"
+                :class="statusClass"
+                v-if="statusMsg != ''"
                 >
-                    {{ statusMsg }}
-                </p>
-                <!-- Add score button -->
-                <div id="buttons">
-                    <button class="add-score" @click="addPoints">
-                        Add Score
-                    </button>
-                </div>
+                {{ statusMsg }}
+            </p>
+            <!-- Add score button -->
+            <div id="buttons">
+                <button class="add-score" @click="addPoints">
+                    Add Score
+                </button>
             </div>
-        </main>
-    </body>
+        </div>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+</body>
 </html>

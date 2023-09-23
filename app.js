@@ -6,16 +6,7 @@ const app = Vue.createApp({
             isInputValid: true,
             statusMsg: "",
             counter: 0,
-            people: [
-                { name: "Chi", points: 15 },
-                { name: "Sophie", points: 14 },
-                { name: "Vicky", points: 12 },
-                { name: "Hyin Ki", points: 9 },
-                { name: "Jess Myn", points: 7 },
-                { name: "Ivyn", points: 5 },
-                { name: "Rachel", points: 3 },
-                { name: "Jun Ning", points: 1 },
-            ],
+            people: [],
         };
     },
     computed: {
@@ -39,31 +30,67 @@ const app = Vue.createApp({
         },
     },
     methods: {
-        addPoints() {
-            // input validation
-            if (this.pointsInput > 0 && this.nameInput !== "") {
-                // Looping through and updating points in data base
-                for (person of this.people) {
-                    if (person.name == this.nameInput) {
-                        person.points += this.pointsInput;
-                    }
-                }
-
-                // reset input fields
+        async addPoints() {
+          // Input validation
+          if (this.nameInput !== "") {
+            try {
+              // Send a POST request to add points to the person in the database
+              const response = await fetch("http://localhost:8888/IS216/Leaderboard/api/add.php", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  name: this.nameInput,
+                  points: this.pointsInput,
+                }),
+              });
+    
+              if (response.ok) {
+                // Reset input fields
                 this.pointsInput = 1;
                 this.nameInput = "";
-
-                // Reorder rankings in dsc order based on updated score
-                this.people.sort((a, b) => {
-                    return b.points - a.points;
-                });
+    
+                // Reorder rankings in descending order based on updated score
+                this.fetchAllPeople(); // Fetch updated data from the API
                 this.counter++;
                 this.isInputValid = true;
-            } else {
+              } else {
                 this.counter--;
                 this.isInputValid = false;
+              }
+            } catch (error) {
+              console.error("Error adding points:", error);
             }
+          } else {
+            this.counter--;
+            this.isInputValid = false;
+          }
+        console.log("addPoints")
         },
+        fetchAllPeople() {
+            console.log("fetchAllPeople - start");
+            let api_endpoint_url = "http://localhost:8888/IS216/Leaderboard/api/read.php";
+            axios.get(api_endpoint_url).then(response => {
+                // Parse the JSON response
+                console.log("fetchAllPeople - response");
+                console.log(response.data);
+                const data = response.data;
+                this.people = data;
+
+            })
+            .catch(error => {
+
+                // ERROR
+                // Something went wrong
+                console.log(error.message)
+            })
+            console.log("fetchAllPeople - end");
+        }
+    },
+    created() {
+        console.log("created");
+        this.fetchAllPeople();
     },
 });
 

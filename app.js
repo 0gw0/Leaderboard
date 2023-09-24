@@ -29,13 +29,8 @@ const app = Vue.createApp({
 
     watch: {
         counter() {
-            function face() {
-                const rotated = document.getElementById('rotated');
-                rotated.style.transform = 'rotate(-135deg)';
-            }
             if (this.isInputValid) {
                 this.statusMsg = "Score has been updated!";
-                face();
             } else {
                 this.statusMsg = "Please provide a valid input!";
             }
@@ -73,5 +68,8 @@ const app = Vue.createApp({
         },
     },
 });
+
+const rotated = document.getElementById('rotated');
+rotated.style.transform = 'rotate(-135deg)';
 
 app.mount("#leaderboard");

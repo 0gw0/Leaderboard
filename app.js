@@ -31,7 +31,7 @@ const app = Vue.createApp({
         counter() {
             function face() {
                 const rotated = document.getElementById('rotated');
-                rotated.style.transform = 'rotate(90deg)';
+                rotated.style.transform = 'rotate(-135deg)';
             }
             if (this.isInputValid) {
                 this.statusMsg = "Score has been updated!";
@@ -52,7 +52,6 @@ const app = Vue.createApp({
                 for (person of this.people) {
                     if (person.name == this.nameInput) {
                         person.points += this.pointsInput;
-                        myFunction();
                     }
                 }
 

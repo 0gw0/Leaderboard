@@ -60,16 +60,18 @@
                    v-if="statusMsg != ''">
                     {{ statusMsg }}
                 </p>
-                <!-- Add score button -->
+
                 <section id="middle">
                     <img id="image" src="./vickied.jpg">
-                    <div id="buttons">
-                        <button class="add-score" @click="addPoints">
-                            Add Score
-
-                        </button>
-                    </div>
                 </section>
+                
+                <!-- Add score button -->
+
+                <div id="buttons">
+                    <button class="add-score" @click="addPoints">
+                        Add Score
+                    </button>
+                </div>
             </div>
         </main>
     </body>

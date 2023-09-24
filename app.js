@@ -21,6 +21,9 @@ const app = Vue.createApp({
         counter() {
             if (this.isInputValid) {
                 this.statusMsg = "Score has been updated!";
+                const rotated = document.getElementById('rotated');
+                rotated.style.transform = 'rotate(-135deg)';
+                
             } else {
                 this.statusMsg = "Please provide a valid input!";
             }

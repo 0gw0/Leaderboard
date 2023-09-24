@@ -233,6 +233,11 @@ td {
     border-bottom: 0;
 }
 
+.rotated-image {
+    -webkit-transform: rotate(20deg);
+    transform: rotate(20deg);
+}
+
 @media (max-width: 740px) {
     * {
         font-size: 70%;

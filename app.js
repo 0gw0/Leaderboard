@@ -26,10 +26,16 @@ const app = Vue.createApp({
             };
         },
     },
+
     watch: {
         counter() {
+            function face() {
+                var img = document.getElementById("image");
+                img.setAttribute("class", "rotated-image");
+            }
             if (this.isInputValid) {
                 this.statusMsg = "Score has been updated!";
+                face();
             } else {
                 this.statusMsg = "Please provide a valid input!";
             }
@@ -46,6 +52,7 @@ const app = Vue.createApp({
                 for (person of this.people) {
                     if (person.name == this.nameInput) {
                         person.points += this.pointsInput;
+                        myFunction();
                     }
                 }
 
@@ -62,7 +69,8 @@ const app = Vue.createApp({
             } else {
                 this.counter--;
                 this.isInputValid = false;
-            }
+            } 
+
         },
     },
 });

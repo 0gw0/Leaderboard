@@ -33,6 +33,11 @@ input[type="number"],
     font-size: 1.3rem;
 }
 
+.rotated-image {
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+}
+
 #header {
     width: 100%;
     display: flex;

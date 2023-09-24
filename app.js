@@ -30,8 +30,8 @@ const app = Vue.createApp({
     watch: {
         counter() {
             function face() {
-                var img = document.getElementById("image");
-                img.setAttribute("class", "rotated-image");
+                const rotated = document.getElementById('rotated');
+                rotated.style.transform = 'rotate(90deg)';
             }
             if (this.isInputValid) {
                 this.statusMsg = "Score has been updated!";
